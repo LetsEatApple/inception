@@ -1,0 +1,85 @@
+#version: "3.8"
+
+services:
+  nginx:
+    build: requirements/nginx/.
+    container_name: nginx
+    env_file:
+      - .env
+    depends_on:
+      - wordpress
+      - mariadb
+    ports:
+      - "443:443"
+    volumes:
+      - wp_data:/var/www/html
+    networks:
+      inception:
+    #restart: always
+  wordpress:
+    build: requirements/wordpress/.
+    container_name: wordpress
+    environment:
+      db_password_file: /run/secrets/db_password
+      admin_password_file: /run/secrets/admin_password
+      wpuser_password_file: /run/secrets/wpuser_password
+    secrets:
+      - db_password
+      - db_root_password
+      - admin_password
+      - wpuser_password
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    volumes:
+      - wp_data:/var/www/html
+    networks:
+      inception:
+    #restart: always
+  mariadb:
+    build: requirements/mariadb/.
+    container_name: mariadb
+    environment:
+      db_password_file: /run/secrets/db_password
+    secrets:
+      - db_password
+      - db_root_password
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      inception:
+    #restart: always
+
+networks:
+  inception:
+
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  admin_password:
+    file: ../secrets/admin_password.txt
+  wpuser_password:
+    file: ../secrets/wpuser_password.txt
+
+# both must store data inside /home/login/data on host machine
+volumes:
+# contains wp database
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/lea/data/mariadb #change to lhagemos in school
+
+# contains wp website files
+  wp_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/lea/data/wordpress #change to lhagemos in school

@@ -33,15 +33,19 @@ cd inception
 ```
 
 Build and start the project:
-make or make up
+```bash
+make up
+```
 
 Stop the running containers:
+```bash
 make down
+```
 
 
 Access:
 Once running, the WordPress site is available at:
-https://localhost or https://lhagemos.42.de
+https://localhost, https://lhagemos.42.de or https://www.lhagemos.42.de
 
 
 ## Project Description (Docker & Design Choices)

@@ -1,19 +1,20 @@
 #!/bin/bash
 
-db_password=$(cat $db_password_file)
+DB_PW=$(cat /run/secrets/db_password)
 
 cd /etc/mysql
 
 cat <<EOF > init.sql
-CREATE DATABASE ${db_name};
-CREATE USER IF NOT EXISTS '${db_user}'@'%' IDENTIFIED BY '${db_password}';
-GRANT ALL PRIVILEGES ON ${db_name}.* TO '${db_user}'@'%' WITH GRANT OPTION;
+CREATE DATABASE ${DB_NAME};
+CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_PW}';
+GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
 
+exec mariadbd
 #mariadb-install-db
-mysql_install_db
-mysqld
+#mysql_install_db
+#mysqld
 
 
 

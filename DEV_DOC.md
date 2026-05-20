@@ -1,9 +1,7 @@
+*This project has been created as part of the 42 curriculum by lhagemos.*
 
-```md id="devdoc1"
+
 # Developer Documentation — Inception
-
-*This project has been created as part of the 42 curriculum by <login1>[, <login2>[, <login3>]].*
-
 ---
 
 ## Environment Setup

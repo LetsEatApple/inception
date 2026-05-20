@@ -1,2 +1,13 @@
+# runtime config
 .env
-secrets/
+
+# noise
+.git
+.vscode
+.idea
+.DS_Store
+
+# logs
+*.log
+tmp
+*.swp

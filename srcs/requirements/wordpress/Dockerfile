@@ -1,7 +1,7 @@
 FROM debian:bookworm
 
 #RUN apt-get update && apt-get install -y php-fpm (more stability?)
-RUN apt update -y && apt upgrade -y && apt install -y \
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
 php-fpm \
 php-mysqli \
 curl \

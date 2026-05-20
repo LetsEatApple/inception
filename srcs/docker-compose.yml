@@ -3,6 +3,7 @@
 services:
   nginx:
     build: requirements/nginx/.
+    image: nginx
     container_name: nginx
     env_file:
       - .env
@@ -15,14 +16,11 @@ services:
       - wp_data:/var/www/html
     networks:
       inception:
-    #restart: always
+    restart: always
   wordpress:
     build: requirements/wordpress/.
+    image: wordpress
     container_name: wordpress
-    environment:
-      db_password_file: /run/secrets/db_password
-      admin_password_file: /run/secrets/admin_password
-      wpuser_password_file: /run/secrets/wpuser_password
     secrets:
       - db_password
       - db_root_password
@@ -36,12 +34,11 @@ services:
       - wp_data:/var/www/html
     networks:
       inception:
-    #restart: always
+    restart: always
   mariadb:
     build: requirements/mariadb/.
+    image: mariadb
     container_name: mariadb
-    environment:
-      db_password_file: /run/secrets/db_password
     secrets:
       - db_password
       - db_root_password
@@ -51,7 +48,7 @@ services:
       - db_data:/var/lib/mysql
     networks:
       inception:
-    #restart: always
+    restart: always
 
 networks:
   inception:
@@ -70,16 +67,18 @@ secrets:
 volumes:
 # contains wp database
   db_data:
+    name: db_data
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/lea/data/mariadb #change to lhagemos in school
+      device: /home/lhagemos/data/mariadb #change to lhagemos in school
 
 # contains wp website files
   wp_data:
+    name: wp_data
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/lea/data/wordpress #change to lhagemos in school
+      device: /home/lhagemos/data/wordpress #change to lhagemos in school

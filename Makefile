@@ -16,7 +16,7 @@
 all : up
 
 up:
-	@docker-compose -f ./srcs/docker-compose.yml up -d
+	@docker-compose -f ./srcs/docker-compose.yml up -d > docker_logs.txt 2>&1
 
 re:
 	@docker-compose -f ./srcs/docker-compose.yml up -d --build
@@ -36,21 +36,21 @@ ps:
 	@docker ps
 
 nginx :
-	@docker-compose -f ./srcs/docker-compose.yml exec nginx sh
+	@docker-compose -f ./srcs/docker-compose.yml exec nginx sh || true
 
 wp :
-	@docker-compose -f ./srcs/docker-compose.yml exec wordpress sh
+	@docker-compose -f ./srcs/docker-compose.yml exec wordpress bash || true
 
 mdb :
-	@docker-compose -f ./srcs/docker-compose.yml exec mariadb sh
+	@docker-compose -f ./srcs/docker-compose.yml exec mariadb bash || true
 
 clean :
 	@docker system prune
 
 fclean :
 	@docker system prune --volumes -a
-	@ sudo rm -rf /home/lea/data/mariadb/*
-	@ sudo rm -rf /home/lea/data/wordpress/*
+	@ sudo rm -rf /home/lhagemos/data/mariadb/*
+	@ sudo rm -rf /home/lhagemos/data/wordpress/*
 
 #cd /var/www/html
 #./wp-cli.phar user list --allow-root

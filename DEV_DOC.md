@@ -31,6 +31,7 @@ However, you still need to configure:
 - Environment variables (.env)
 - Secrets for passwords
 - Host Redirection
+- Adjust storage path for the volumes in docker-compose.yml to your host file system
 
 #### Environment
 
@@ -40,6 +41,8 @@ The file must contain the following variables:
 
 - DOMAIN_NAME
 *Must match the server_name defined in the NGINX configuration.*
+- LOGIN
+*Must match the value of the USER environment variable on the host system*
 - CRED_CERT
 *Path to the self-signed TLS certificate used by NGINX (see nginx configuration file).*
 - CRED_KEY

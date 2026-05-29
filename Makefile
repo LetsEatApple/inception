@@ -16,6 +16,8 @@
 all : up
 
 up:
+	mkdir -p /home/$(USER)/data/mariadb
+	mkdir -p /home/$(USER)/data/wordpress
 	@docker-compose -f ./srcs/docker-compose.yml up -d
 
 re:
@@ -49,6 +51,5 @@ clean :
 
 fclean :
 	@docker system prune --volumes -a
-	@ sudo rm -rf /home/lhagemos/data/mariadb/*
-	@ sudo rm -rf /home/lhagemos/data/wordpress/*
+	@ sudo rm -rf /home/$(USER)/data
 

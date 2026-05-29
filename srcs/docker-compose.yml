@@ -63,7 +63,7 @@ secrets:
   wpuser_password:
     file: ../secrets/wpuser_password.txt
 
-# both must store data inside /home/login/data on host machine
+# both must store data inside /home/<login>/data on host machine
 volumes:
 # contains wp database
   db_data:
@@ -72,7 +72,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/lhagemos/data/mariadb #change to lhagemos in school
+      device: /home/${LOGIN}/data/mariadb
 
 # contains wp website files
   wp_data:
@@ -81,4 +81,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/lhagemos/data/wordpress #change to lhagemos in school
+      device: /home/${LOGIN}/data/wordpress

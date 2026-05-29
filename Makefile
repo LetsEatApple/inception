@@ -16,7 +16,7 @@
 all : up
 
 up:
-	@docker-compose -f ./srcs/docker-compose.yml up -d > docker_logs.txt 2>&1
+	@docker-compose -f ./srcs/docker-compose.yml up -d
 
 re:
 	@docker-compose -f ./srcs/docker-compose.yml up -d --build
@@ -52,5 +52,3 @@ fclean :
 	@ sudo rm -rf /home/lhagemos/data/mariadb/*
 	@ sudo rm -rf /home/lhagemos/data/wordpress/*
 
-#cd /var/www/html
-#./wp-cli.phar user list --allow-root

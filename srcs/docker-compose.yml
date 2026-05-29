@@ -23,7 +23,6 @@ services:
     container_name: wordpress
     secrets:
       - db_password
-      - db_root_password
       - admin_password
       - wpuser_password
     env_file:
@@ -52,6 +51,7 @@ services:
 
 networks:
   inception:
+    name: inception
 
 secrets:
   db_password:

@@ -2,8 +2,6 @@
 
 # User Documentation — Inception
 
----
-
 ## Overview
 
 This project runs a small web infrastructure using Docker. It provides:
@@ -21,57 +19,76 @@ All services run in isolated containers and communicate through a Docker network
 ### Start
 Run the following command in the root directory:
 
-```bash id="u_start"
-make
+```bash
+make up
 ```
-This will build and start all services.
+Starts all services in detached mode. Docker images are built only if they don’t already exist.
 
-Stop
+### Stop
 To stop all running containers:
+```bash
 make down
+```
 
 Full cleanup (optional)
-make clean
+```bash
+make fclean
+```
 This removes containers, images, and volumes.
 
-Accessing the Website
+---
+
+## Access
+
+### Website
 
 Once the stack is running, open your browser:
-https://localhost
+https://lhagemos.42.de
 ⚠️ You may see a security warning because of the self-signed SSL certificate. This is expected.
 
-Administration Panel
+### Administration Panel
 
 WordPress admin panel is available at:
-https://localhost/wp-admin
-Log in using the admin credentials defined in your environment configuration.
+https://lhagemos.42.de/wp-admin
 
-Credentials Management
+Log in using credentials defined in:
 
-All credentials are stored in environment configuration files (not inside containers).
+.env (configuration values)
+secrets/ (password files)
 
-Typical locations:
+---
 
-.env
-secrets/ (if used in your setup)
+## Credentials Management
 
-They may include:
+Credentials are split into:
 
-Database user/password
-WordPress admin user/password
-Database root password
+- .env → configuration values (database name, usernames, emails)
+- secrets/ → password files used by containers
 
-⚠️ Never expose these files publicly.
+Secrets include:
 
-Checking if Services are Running
+- Database user and root password
+- WordPress admin password
+- WordPress user password
+
+⚠️ These files must never be exposed publicly.
+
+---
+
+## Checking if Services are Running
 
 Run:
+```bash
 docker ps
+```
+
 You should see containers such as:
 
-nginx
-wordpress
-mariadb
+-nginx
+-wordpress
+-mariadb
 
 If a container is missing, check logs:
+```bash
 docker logs <container_name>
+```

@@ -23,12 +23,14 @@ Each service runs in a dedicated container and communicates through a Docker net
 - Docker installed
 - Docker Compose installed
 - Linux-based system (recommended)
+- secrets directory at root of repository containing .txt files for required passwords
+- .env-file in "srcs" directory containing the required variables
 
 ### Setup
 
 Clone the repository:
 ```bash
-git clone <repository-url>
+git clone <repository-url> inception
 cd inception
 ```
 
@@ -36,6 +38,13 @@ Build and start the project:
 ```bash
 make up
 ```
+Starts all services in detached mode. Docker images are built only if they don’t already exist.
+
+For rebuilding and starting use:
+```bash
+make re
+```
+Forces a rebuild of all Docker images and recreates the containers.
 
 Stop the running containers:
 ```bash
@@ -44,9 +53,43 @@ make down
 
 
 Access:
-Once running, the WordPress site is available at:
-https://localhost, https://lhagemos.42.de or https://www.lhagemos.42.de
 
+Once running, the WordPress site is available at:
+https://localhost or https://lhagemos.42.de
+
+To test both configured wordpress users go to:
+https://lhagemos.42.de/wp-login.php
+
+---
+
+## Resources
+
+Documentation & Tutorials
+https://www.youtube.com/watch?v=bKFMS5C4CG0
+https://docs.docker.com/build/concepts/dockerfile/
+https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Transport_Layer_Security
+https://www.cyberciti.biz/faq/configure-nginx-to-use-only-tls-1-2-and-1-3/
+https://medium.com/@yakuphanbilgic3/create-self-signed-certificates-and-keys-with-openssl-4064f9165ea3
+https://www.youtube.com/watch?v=DM65_JyGxCo
+https://docs.docker.com/
+https://docs.docker.com/compose/
+https://mariadb.com/kb/en/
+https://wordpress.org/support/
+https://nginx.org/en/docs/
+
+
+### AI Usage
+
+Artificial Intelligence was used in this project for:
+
+Understanding Docker concepts (networks, volumes, containers)
+Debugging configuration issues (Docker Compose, NGINX setup)
+Structuring documentation (README formatting and clarity)
+Explaining architectural differences (VM vs Docker, secrets vs env variables)
+
+AI was not used to generate the entire project code, but rather as a learning and assistance tool during development and troubleshooting.
+
+---
 
 ## Project Description (Docker & Design Choices)
 
@@ -102,26 +145,3 @@ This project uses volumes to persist:
 - WordPress files
 - MariaDB database data
 
-## Resources
-Documentation & Tutorials
-https://docs.docker.com/
-https://docs.docker.com/compose/
-https://mariadb.com/kb/en/
-https://wordpress.org/support/
-https://nginx.org/en/docs/
-
-Learning Materials
-Docker networking basics
-Container vs VM architecture explanations
-TLS/SSL configuration guides for NGINX
-
-### AI Usage
-
-Artificial Intelligence was used in this project for:
-
-Understanding Docker concepts (networks, volumes, containers)
-Debugging configuration issues (Docker Compose, NGINX setup)
-Structuring documentation (README formatting and clarity)
-Explaining architectural differences (VM vs Docker, secrets vs env variables)
-
-AI was not used to generate the entire project code, but rather as a learning and assistance tool during development and troubleshooting.
